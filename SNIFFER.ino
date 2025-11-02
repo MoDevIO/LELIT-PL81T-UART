@@ -166,11 +166,11 @@ void loop() {
       // Publish to MQTT with rate limiting
       static int lastTemp = -999;
       static unsigned long lastPublish = 0;
-      const unsigned long publishInterval = 1000;  // 5s
+      const unsigned long publishInterval = 5000;  // 5s
       if (tempC != lastTemp || millis() - lastPublish > publishInterval) {
         lastTemp = tempC;
         lastPublish = millis();
-        mqttClient.publish(mqtt_topic, String(77).c_str());
+        mqttClient.publish(mqtt_topic, String(lastTemp).c_str());
         Serial.println("Published to MQTT");
       }
     }
